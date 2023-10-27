@@ -24,11 +24,7 @@ yarn
 5. run locally or build and serve
 
 ```bash
-yarn dev
-
-# Or
-
-yarn build
+yarn build:rspack && yarn build:lib
 yarn start
 ```
 
