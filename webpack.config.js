@@ -1,14 +1,15 @@
-import path from 'path'
-import nodeExternals from 'webpack-node-externals'
-import LoadablePlugin from '@loadable/webpack-plugin'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-
+const path = require('path');
+const nodeExternals = require('webpack-node-externals');
+const LoadablePlugin = require('@loadable/webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+console.log('xxx');
 const DIST_PATH = path.resolve(__dirname, 'public/dist')
 const production = process.env.NODE_ENV === 'production'
 const development = !production
 
 const getConfig = target => ({
   name: target,
+  devtool:false,
   mode: development ? 'development' : 'production',
   target,
   entry: `./src/client/main-${target}.js`,
@@ -41,6 +42,7 @@ const getConfig = target => ({
   optimization: {
     // this will lead to runtime error
     runtimeChunk: target !== 'node',
+    minimize:false
   },
 
   output: {
@@ -52,4 +54,4 @@ const getConfig = target => ({
   plugins: [new LoadablePlugin(), new MiniCssExtractPlugin()],
 })
 
-export default [getConfig('web'), getConfig('node')]
+module.exports= [getConfig('web'), getConfig('node')]

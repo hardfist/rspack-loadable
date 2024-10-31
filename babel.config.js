@@ -9,12 +9,11 @@ function isWebpack(caller) {
 module.exports = api => {
   const web = api.caller(isWebTarget)
   const webpack = api.caller(isWebpack)
-
   return {
     presets: [
-      '@babel/preset-react',
+      require.resolve('@babel/preset-react'),
       [
-        '@babel/preset-env',
+        require.resolve('@babel/preset-env'),
         {
           useBuiltIns: web ? 'entry' : undefined,
           corejs: web ? 'core-js@3' : false,
@@ -23,6 +22,6 @@ module.exports = api => {
         },
       ],
     ],
-    plugins: ['@babel/plugin-syntax-dynamic-import', '@loadable/babel-plugin'],
+    plugins: [require.resolve('@babel/plugin-syntax-dynamic-import'), require.resolve('@loadable/babel-plugin')],
   }
 }
